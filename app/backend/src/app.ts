@@ -31,5 +31,5 @@ class App {
 
 export { App };
 
-// A execução dos testes de cobertura depende dessa exportação
+// A execução dos testes de cobertura depende dessa exportação - iniciando
 export const { app } = new App();
