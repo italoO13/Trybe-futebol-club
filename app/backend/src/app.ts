@@ -1,4 +1,6 @@
 import * as express from 'express';
+import CustomError from './helper/CustomError';
+import router from './routes';
 
 class App {
   public app: express.Express;
