@@ -10,6 +10,11 @@ class App {
 
     // Não remover essa rota
     this.app.get('/', (req, res) => res.json({ ok: true }));
+    this.app.use(router)
+    this.app.use((err:CustomError, req:express.Request, res:express.Response, _next:express.NextFunction) => {
+      console.log(err);
+      res.status(err.code | 500).json({message: err.message})
+    })
   }
 
   private config():void {
