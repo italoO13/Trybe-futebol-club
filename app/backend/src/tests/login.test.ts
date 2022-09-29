@@ -31,7 +31,7 @@ describe('Testa a camada  de Login', () => {
   })
 
   describe('/POST', () => {
-    it('Deve cadastrar um usuário com sucesso', async() => {
+    it('Deve logar um usuário com sucesso', async() => {
       const result = await chai.request(app).post('/login').send(mock.loginSucess);
       expect(result.status).to.equal(201);
       expect(result.body).to.be.property('token');
