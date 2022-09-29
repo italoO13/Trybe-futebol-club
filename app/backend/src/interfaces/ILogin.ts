@@ -1,4 +1,4 @@
-export default class LoginDTO {
+export default class ILogin {
   email: string;
   password: string;
 }
