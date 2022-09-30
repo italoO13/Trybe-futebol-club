@@ -34,6 +34,17 @@ describe('Testa a camada  de Login', () => {
       expect(result.body).to.be.property('token');
     });
 
+    it('Deve retornar um erro com a menssagem "All fields must be filled" e status 400 quando não é passado o email ao fazer login', async() => {
+      loginModel= {
+        findOne: sinon
+        .stub()
+        .resolves()
+      }
+      const result = await chai.request(app).post('/login').send({...mock.loginSucess, email:''})
+      expect(result.status).to.be.equal(400);
+      expect(result.body).to.be.equal('All fields must be filled');
+    })
+
   })
 
 });
