@@ -15,7 +15,10 @@ class App {
     this.app.use(router)
     this.app.use((err:CustomError, req:express.Request, res:express.Response, _next:express.NextFunction) => {
       console.log(err);
-      res.status(err.code | 500).json({message: err.message})
+      if(!err.code) {
+        return res.status(500).json({message: 'internal error'})
+      }
+      res.status(err.code).json({message: err.message})
     })
   }
 
