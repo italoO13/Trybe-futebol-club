@@ -36,7 +36,8 @@ export default class LoginService implements ILoginService {
     const response = await this.verifyUser(email, password);
     const token = this.auth.generateToken({
       id: response.id,
-      email: response.email
+      email: response.email,
+      role: response.role
     })
     return token;
   }
