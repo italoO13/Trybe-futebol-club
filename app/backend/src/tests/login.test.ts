@@ -1,6 +1,5 @@
 import * as sinon from 'sinon';
 import * as chai from 'chai';
-import * as mocha from 'mocha'
 // @ts-ignore
 
 import chaiHttp = require('chai-http');
@@ -16,11 +15,15 @@ const { expect } = chai;
 
 describe('Testa a camada  de Login', () => {
 
+  afterEach(()=>{
+    sinon.restore()
+  })
+
   describe('/POST', () => {
     let chaiHttpResponse: Response;
     let loginModel:ILoginModel;
   
-    before(async () => {
+    beforeEach(async () => {
       loginModel= {
         findOne: sinon
         .stub()
@@ -28,13 +31,15 @@ describe('Testa a camada  de Login', () => {
       }
     });
   
-    after(()=>{
-      (loginModel.findOne as sinon.SinonStub).restore();
-    })
 
     it('Deve logar um usuário com sucesso', async() => {
+      loginModel= {
+        findOne: sinon
+        .stub()
+        .resolves(mock.user)
+      }
       const result = await chai.request(app).post('/login').send(mock.loginSucess);
-      expect(result.status).to.equal(201);
+      expect(result.status).to.equal(200);
       expect(result.body).to.be.property('token');
     });
 
