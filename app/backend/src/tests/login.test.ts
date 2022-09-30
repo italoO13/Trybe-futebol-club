@@ -81,7 +81,17 @@ describe('Testa a camada  de Login', () => {
       expect(result.body).to.property('message')
       expect(result.body.message).to.equal('Incorrect email or password')
     })
-
+    it('Deve retornar um erro com a menssagem "Incorrect email or password" e status 401 quando o password está incorreto', async() => {
+      loginModel= {
+        findOne: sinon
+        .stub()
+        .resolves(mock.user)
+      }
+      const result = await chai.request(app).post('/login').send({...mock.loginSucess, password:'naoexiste'})
+      expect(result.status).to.be.equal(401);
+      expect(result.body).to.property('message')
+      expect(result.body.message).to.equal('Incorrect email or password')
+    })
 
   })
 
