@@ -42,7 +42,8 @@ describe('Testa a camada  de Login', () => {
       }
       const result = await chai.request(app).post('/login').send({...mock.loginSucess, email:''})
       expect(result.status).to.be.equal(400);
-      expect(result.body).to.be.equal('All fields must be filled');
+      expect(result.body).to.property('message')
+      expect(result.body.message).to.equal('All fields must be filled')
     })
 
   })
