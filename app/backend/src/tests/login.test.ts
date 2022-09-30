@@ -58,6 +58,31 @@ describe('Testa a camada  de Login', () => {
       expect(result.body.message).to.equal('All fields must be filled')
     })
 
+    it('Deve retornar um erro com a menssagem "Incorrect email or password" e status 401 quando é passado um email invalido', async() => {
+      loginModel= {
+        findOne: sinon
+        .stub()
+        .resolves()
+      }
+      const result = await chai.request(app).post('/login').send({...mock.loginSucess, email:'emailinvalido.com'})
+      expect(result.status).to.be.equal(401);
+      expect(result.body).to.property('message')
+      expect(result.body.message).to.equal('Incorrect email or password')
+    })
+
+    it('Deve retornar um erro com a menssagem "Incorrect email or password" e status 401 quando não é encontrado o email no banco de dados', async() => {
+      loginModel= {
+        findOne: sinon
+        .stub()
+        .resolves()
+      }
+      const result = await chai.request(app).post('/login').send({...mock.loginSucess, email:'email@naocadastrado.com'})
+      expect(result.status).to.be.equal(401);
+      expect(result.body).to.property('message')
+      expect(result.body.message).to.equal('Incorrect email or password')
+    })
+
+
   })
 
 });
