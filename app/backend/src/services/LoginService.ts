@@ -25,7 +25,7 @@ export default class LoginService implements ILoginService {
     const statusPassword = Bycrpt.verifyPassword(response.password, password)
 
     if(!statusPassword) {
-      throw new Error('Não encontrado!');
+      throw new CustomError(401, 'Incorrect email or password');
     }
 
     return response;
