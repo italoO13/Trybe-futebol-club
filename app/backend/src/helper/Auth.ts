@@ -1,4 +1,5 @@
 import * as jwt from "jsonwebtoken";
+import IJWT from "../interfaces/IAuth";
 
 
 export default class AuthJWT {
@@ -19,5 +20,9 @@ export default class AuthJWT {
     {expiresIn: this.config.expiresIn, algorithm:this.config.algorithm}
     )
     return token;
+  }
+
+  veriryToken(token:string) {
+    return jwt.verify(token,this.secret) as IJWT
   }
 }
