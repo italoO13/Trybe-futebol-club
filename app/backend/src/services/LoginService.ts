@@ -4,6 +4,7 @@ import ILogin from '../interfaces/ILogin';
 import IUser from '../interfaces/IUser';
 import * as Bycrpt from '../helper/Bcrypt';
 import AuthJWT from "../helper/Auth";
+import CustomError from "../helper/CustomError";
 
 export default class LoginService implements ILoginService {
   private model: ILoginModel
@@ -18,7 +19,7 @@ export default class LoginService implements ILoginService {
     const response = await this.model.findOne(email);
 
     if(!response) {
-      throw new Error('Não encontrado!');
+      throw new CustomError(401, 'Incorrect email or password');
     }
 
     const statusPassword = Bycrpt.verifyPassword(response.password, password)
