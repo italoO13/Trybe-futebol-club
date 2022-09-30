@@ -15,22 +15,13 @@ const { expect } = chai;
 
 describe('Testa a camada  de Login', () => {
 
-  afterEach(()=>{
-    sinon.restore()
-  })
-
   describe('/POST', () => {
     let chaiHttpResponse: Response;
     let loginModel:ILoginModel;
-  
-    beforeEach(async () => {
-      loginModel= {
-        findOne: sinon
-        .stub()
-        .resolves(mock.user)
-      }
-    });
-  
+
+    afterEach(()=>{
+      sinon.restore()
+    })
 
     it('Deve logar um usuário com sucesso', async() => {
       loginModel= {
@@ -42,7 +33,6 @@ describe('Testa a camada  de Login', () => {
       expect(result.status).to.equal(200);
       expect(result.body).to.be.property('token');
     });
-
 
   })
 
