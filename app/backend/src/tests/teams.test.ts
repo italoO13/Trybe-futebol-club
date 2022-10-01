@@ -34,4 +34,32 @@ describe('Testa a camada  de Teams', () => {
     });
 
   })
+
+  describe('/GET/:id', () =>{
+
+    afterEach(()=>{
+      sinon.restore()
+    })
+
+    it('Deve retornar o time "Avaí/Kindermann" quando passado o id 1', async() => {
+      const model = new TeamsModel();
+      sinon.stub(TeamsModel.prototype,'getById').resolves(mock.teams[0])
+
+      const result = await chai.request(app).get('/teams/1');
+      expect(result.status).to.equal(200);
+      expect(result.body).to.deep.equal(mock.teams[0]);
+    })
+
+    it('Deve retornar um erro ao passar um id que não existe', async() => {
+      const model = new TeamsModel();
+      sinon.stub(TeamsModel.prototype,'getById').resolves()
+
+      const result = await chai.request(app).get('/teams/1');
+      expect(result.status).to.equal(400);
+      expect(result.body).property('message');
+      expect(result.body.message).to.be.equal('Team not found')
+    })
+
+
+  })
 });
