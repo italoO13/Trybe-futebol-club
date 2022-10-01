@@ -8,6 +8,7 @@ import { app } from '../app';
 import mock from './mock'
 import { Response } from 'superagent';
 import ILoginModel from '../Repository/ILoginModel';
+import Auth from '../helper/Auth';
 
 chai.use(chaiHttp);
 
@@ -93,6 +94,35 @@ describe('Testa a camada  de Login', () => {
       expect(result.body.message).to.equal('Incorrect email or password')
     })
 
+  })
+
+  describe('/GET', () => {
+    beforeEach(() => {
+      const auth = new Auth();
+      sinon.stub(auth, 'veriryToken').resolves({
+        id: mock.user.id,
+        email: mock.user.email,
+        role: mock.user.role
+      })
+    })
+
+    afterEach(() => {
+      sinon.restore()
+    })
+
+    it('Deve retornar um role no metodo get com base no usuário enviado', async() => {
+      const result = await chai.request(app).get('/login/validate').set('authorization', mock.token)
+      expect(result.status).to.be.equal(200);
+      expect(result.body).to.property('role')
+      expect(result.body.role).to.equal('admin')
+    })
+
+    it('Deve retornar um erro "Token not found" quando não é passado um token em authorization', async() => {
+      const result = await chai.request(app).get('/login/validate').set('authorization','')
+      expect(result.status).to.be.equal(401);
+      expect(result.body).to.property('message')
+      expect(result.body.message).to.equal('Token not found')
+    })
   })
 
 });

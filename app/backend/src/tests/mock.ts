@@ -9,5 +9,7 @@ export default {
     role: 'teste',
     email: 'teste@teste.com',
     password: '$2a$08$xi.Hxk1czAO0nZR..B393u10aED0RQ1N3PAEXQ7HxtLjKPEZBu.PW'
-  }
+  },
+  token:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NjQ1NjgzNzIsImV4cCI6MTY2NDY1NDc3Mn0.YkMMy6_qi95kJLO2fDQEQPowOKNOWxQqk8lYd7_QsZM"
+
 }
