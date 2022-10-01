@@ -1,5 +1,5 @@
-import User from "../database/models/User";
-import IUser from "../interfaces/IUser";
+import User from "../../database/models/User";
+import IUser from "../../interfaces/IUser";
 import ILoginModel from "./ILoginModel";
 
 export default class LoginModel implements ILoginModel{

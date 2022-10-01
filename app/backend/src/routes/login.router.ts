@@ -1,7 +1,7 @@
 import { Router } from "express";
-import LoginService from "../services/LoginService";
-import LoginController from "../controllers/LoginController";
-import LoginModel from "../Repository/LoginModel";
+import LoginService from "../services/Login/LoginService";
+import LoginController from "../controllers/Login/LoginController";
+import LoginModel from "../Repository/Login/LoginModel";
 import LoginMiddleware from "../middlewares/login.middleware";
 import AuthMiddleware from '../middlewares/auth.middleware';
 

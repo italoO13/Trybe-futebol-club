@@ -1,7 +1,7 @@
 import { Response, Request, NextFunction } from 'express';
-import IJWT from '../interfaces/IAuth';
-import IRequestWithUser from '../interfaces/IRequestWithUser';
-import ILoginService from '../services/ILoginService';
+import IJWT from '../../interfaces/IAuth';
+import IRequestWithUser from '../../interfaces/IRequestWithUser';
+import ILoginService from '../../services/Login/ILoginService';
 import ILoginController from './ILoginController';
 
 export default class LoginController implements ILoginController {

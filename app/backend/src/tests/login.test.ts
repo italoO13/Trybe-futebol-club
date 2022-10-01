@@ -7,7 +7,7 @@ import chaiHttp = require('chai-http');
 import { app } from '../app';
 import mock from './mock'
 import { Response } from 'superagent';
-import ILoginModel from '../Repository/ILoginModel';
+import ILoginModel from '../Repository/Login/ILoginModel';
 import Auth from '../helper/Auth';
 
 chai.use(chaiHttp);

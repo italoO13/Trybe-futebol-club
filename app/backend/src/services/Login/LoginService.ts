@@ -1,10 +1,10 @@
 import ILoginService from "./ILoginService";
-import ILoginModel from "../Repository/ILoginModel";
-import ILogin from '../interfaces/ILogin';
-import IUser from '../interfaces/IUser';
-import * as Bycrpt from '../helper/Bcrypt';
-import AuthJWT from "../helper/Auth";
-import CustomError from "../helper/CustomError";
+import ILoginModel from "../../Repository/Login/ILoginModel";
+import ILogin from '../../interfaces/ILogin';
+import IUser from '../../interfaces/IUser';
+import * as Bycrpt from '../../helper/Bcrypt';
+import AuthJWT from "../../helper/Auth";
+import CustomError from "../../helper/CustomError";
 
 export default class LoginService implements ILoginService {
   private model: ILoginModel

@@ -1,5 +1,5 @@
 import { Response, Request, NextFunction } from 'express';
-import IRequestWithUser from '../interfaces/IRequestWithUser';
+import IRequestWithUser from '../../interfaces/IRequestWithUser';
 
 export default interface ILoginController {
   createSession(req:Request, res:Response, next: NextFunction):void;
