@@ -8,6 +8,16 @@ export default class TeamsController implements ITeamsController {
     this.service = service;
   }
 
+  getById = async(req: Request, res: Response, next: NextFunction): Promise<void>  => {
+    try {
+      const {id} = req.params;
+      const result = await this.service.getById(Number(id));
+      res.status(200).json(result);
+    } catch (error) {
+      next(error);
+    }
+  }
+
   getAll = async(req: Request, res: Response, next: NextFunction): Promise<void>  => {
     try {
       const result = await this.service.getAll();
