@@ -30,7 +30,20 @@ export default class MatchesModel implements IMatchesModel {
     return result;
   }
 
+  private async validatedTeams(match:IMatch):Promise<void> {
+    const homeTeam = await this.matchById(match.homeTeam);
+    const awayTeam = await this.matchById(match.awayTeam);
+    if(!homeTeam || !awayTeam) {
+      throw new CustomError(404, "There is no team with such id!")
+    }
+
+    if(match.homeTeam === match.awayTeam) {
+      throw new CustomError(401, "It is not possible to create a match with two equal teams")
+    }
+  }
+
   async create(match: IMatch): Promise<IMatch> {
+    await this.validatedTeams(match);
     const result = await this.model.create(match);
     return result;
   }
