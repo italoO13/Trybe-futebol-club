@@ -20,4 +20,8 @@ export default class MatchesService implements IMatchesService {
     const result = await this.model.create(match);
     return result;
   }
+
+  async updatedProgress(idMatch:number):Promise<void> {
+    await this.model.updatedProgress(idMatch)
+  }
 }

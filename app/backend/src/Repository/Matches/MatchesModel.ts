@@ -35,4 +35,11 @@ export default class MatchesModel implements IMatchesModel {
     return result;
   }
 
+  async updatedProgress(idMatch: number):Promise<void> {
+    await this.model.update(
+      {'inProgress': false},
+      {where: {'id': idMatch}}
+    )
+  }
+
 }

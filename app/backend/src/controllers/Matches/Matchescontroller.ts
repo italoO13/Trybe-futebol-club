@@ -27,4 +27,14 @@ export default class MatchersController implements IMatchesController {
      next(error) 
     }
   }
+
+  updatedProgress = async(req: IRequestWithUser, res: Response<any, Record<string, any>>, next: NextFunction) => {
+    try {
+      const {id} = req.params;
+      await this.service.updatedProgress(Number(id))
+      res.status(200).json({ "message": "Finished" })
+    } catch (error) {
+      next(error);
+    }
+  }
 }
