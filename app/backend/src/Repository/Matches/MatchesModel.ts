@@ -2,6 +2,7 @@ import IMatch from "../../interfaces/IMatche";
 import IMatchesModel from "./IMatchesModel";
 import Match from "../../database/models/Match";
 import Team from "../../database/models/Team";
+import CustomError from "../../helper/CustomError";
 
 export default class MatchesModel implements IMatchesModel {
   model = Match;
@@ -47,6 +48,7 @@ export default class MatchesModel implements IMatchesModel {
     const result = await this.model.create(match);
     return result;
   }
+
 
   async updatedProgress(idMatch: number):Promise<void> {
     await this.model.update(

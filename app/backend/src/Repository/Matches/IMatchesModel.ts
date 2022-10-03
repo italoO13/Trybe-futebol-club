@@ -5,4 +5,5 @@ export default interface IMatchesModel {
   getInProgress(inProgress: boolean):Promise<IMatch[]>
   create(match: IMatch):Promise<IMatch>
   updatedProgress(id: number):Promise<void>
+  matchById(id:number):Promise<IMatch | null>
 }
