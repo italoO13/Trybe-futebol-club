@@ -9,7 +9,8 @@ export default class MatchersController implements IMatchesController {
   }
   getAll = async(req: Request, res: Response, next: NextFunction) => {
     try {
-      const response = await this.service.getAll();
+      const {inProgress} = req.query;
+      const response = await this.service.getAll(inProgress as string | null);
       res.status(200).json(response);
     } catch (error) {
       next(error);
