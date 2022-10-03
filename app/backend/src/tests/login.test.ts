@@ -8,6 +8,7 @@ import { app } from '../app';
 import mock from './mock'
 import { Response } from 'superagent';
 import ILoginModel from '../Repository/Login/ILoginModel';
+import LoginModel from '../Repository/Login/LoginModel';
 import Auth from '../helper/Auth';
 
 chai.use(chaiHttp);
@@ -95,8 +96,7 @@ describe('Testa a camada  de Login', () => {
 
   describe('/GET', () => {
     beforeEach(() => {
-      const auth = new Auth();
-      sinon.stub(auth, 'veriryToken').resolves({
+      sinon.stub(Auth.prototype, 'veriryToken').resolves({
         id: mock.user.id,
         email: mock.user.email,
         role: mock.user.role

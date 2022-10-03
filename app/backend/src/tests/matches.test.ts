@@ -76,6 +76,7 @@ describe('Testa a camada  de Matches', () => {
           expect(result.body).to.deep.equal({ "message": "It is not possible to create a match with two equal teams" });
         })
 
+      })
     })
 
   })
