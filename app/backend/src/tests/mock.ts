@@ -54,5 +54,12 @@ export default {
         "teamName": "Santos"
       }
     },
-  ]
+  ],
+  newMatch:{
+    "homeTeam": 16, // O valor deve ser o id do time
+    "awayTeam": 8, // O valor deve ser o id do time
+    "homeTeamGoals": 2,
+    "awayTeamGoals": 2,
+    "inProgress": true
+  }
 }
