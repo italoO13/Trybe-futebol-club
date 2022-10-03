@@ -42,4 +42,8 @@ export default class MatchesModel implements IMatchesModel {
     )
   }
 
+  async matchById(id:number):Promise<IMatch | null> {
+    return await this.model.findByPk(id);
+  }
+
 }
