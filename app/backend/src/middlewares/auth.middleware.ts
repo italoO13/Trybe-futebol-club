@@ -16,7 +16,7 @@ export default class Auth {
       req.user = decode;
       next()
     } catch (error) {
-      next(new CustomError(401, 'Invalid Token'));
+      next(new CustomError(401, 'Token must be a valid token'));
     }
   }
 }
