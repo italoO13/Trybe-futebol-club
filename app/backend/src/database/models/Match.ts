@@ -2,16 +2,16 @@ import { Model, INTEGER, BOOLEAN } from 'sequelize';
 import db from '.';
 import Team from './Team';
 
-class Matcher extends Model {
+class Match extends Model {
   id?: number;
   homeTeam!: number;
   homeTeamGoals!: number;
   awayTeam!: number;
-  awayTeamGoals: string;
+  awayTeamGoals: number;
   inProgress: boolean;
 }
 
-Matcher.init({
+Match.init({
   id: {
     type: INTEGER,
     allowNull: false,
@@ -58,8 +58,9 @@ Matcher.init({
   timestamps: false,
 });
 
-Matcher.belongsTo(Team, {foreignKey:'homeTeam', as: 'teamhome'});
-Matcher.belongsTo(Team, {foreignKey:'awayTeam', as: 'awayhome'});
-Team.hasMany(Matcher, {foreignKey:'homeTeam', as: 'homeTeamMatches'});
+Match.belongsTo(Team, {foreignKey:'homeTeam', as: 'teamhome'});
+Match.belongsTo(Team, {foreignKey:'awayTeam', as: 'teamAway'});
+Team.hasMany(Match, {foreignKey:'homeTeam', as: 'homeTeamMatches'});
+Team.hasMany(Match, {foreignKey:'awayTeam', as: 'teamAwayMatches'} )
 
-export default Matcher;
+export default Match;
