@@ -25,11 +25,8 @@ describe('Testa a camada  de Login', () => {
     })
 
     it('Deve logar um usuário com sucesso', async() => {
-      loginModel= {
-        findOne: sinon
-        .stub()
-        .resolves(mock.user)
-      }
+
+      sinon.stub(LoginModel.prototype, 'findOne').resolves(mock.user)
       const result = await chai.request(app).post('/login').send(mock.loginSucess);
       expect(result.status).to.equal(200);
       expect(result.body).to.be.property('token');
