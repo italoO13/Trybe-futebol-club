@@ -48,13 +48,38 @@ describe('Testa a camada  de Matches', () => {
           sinon.restore()
         })
 
-        it.only('Deve retornar um status 201 e um objeto igual a interface IMatch', async() => {
+        it('Deve retornar um status 201 e um objeto igual a interface IMatch', async() => {
           const result = await chai.request(app).post('/matches').send(mock.newMatch)
           .set('authorization', mock.token);
           expect(result.status).to.equal(201);
           expect(result.body).to.deep.equal({...mock.newMatch, id:1});
         })
 
+      })
+
+    })
+
+  })
+
+  describe('/PATCH', () => {
+    describe('ao atualizar uma partida para false', () => {
+      beforeEach(() => {
+        sinon.stub(Auth.prototype, 'veriryToken').resolves({
+          id:1,
+          role: 'admin',
+        })
+        sinon.stub(MatchesModel.prototype,'updatedProgress').resolves()
+      })
+  
+      afterEach(()=>{
+        sinon.restore()
+      })
+
+      it('Deve retornar um status 200 e um objeto igual a interface IMatch', async() => {
+        const result = await chai.request(app).patch('/matches/1/finish').send(mock.newMatch)
+        .set('authorization', mock.token);
+        expect(result.status).to.equal(200);
+        expect(result.body).to.deep.equal({ "message": "Finished" });
       })
 
     })
