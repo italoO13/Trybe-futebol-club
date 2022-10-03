@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import IMatchesController from "./IMatchesController";
 import IMatchesService from "../../services/Matches/IMatchesService";
+import IRequestWithUser from "../../interfaces/IRequestWithUser";
 
 export default class MatchersController implements IMatchesController {
   service: IMatchesService;
@@ -14,6 +15,16 @@ export default class MatchersController implements IMatchesController {
       res.status(200).json(response);
     } catch (error) {
       next(error);
+    }
+  }
+
+  create = async (req: IRequestWithUser, res: Response<any, Record<string, any>>, next: NextFunction) => {
+    try {
+      const response = await this.service.create(req.body);
+      console.log('match',response);
+      res.status(201).json(response)
+    } catch (error) {
+     next(error) 
     }
   }
 }
