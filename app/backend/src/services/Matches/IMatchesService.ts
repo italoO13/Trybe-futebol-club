@@ -1,5 +1,5 @@
-import IMatche from "../../interfaces/IMatche";
+import IMatch from "../../interfaces/IMatche";
 
 export default interface IMatchesService {
-  getAll():Promise<IMatche[]>
+  getAll(inProgress: string | null):Promise<IMatch[]>
 }

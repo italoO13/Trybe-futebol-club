@@ -1,4 +1,4 @@
-import IMatcher from "../../interfaces/IMatche";
+import IMatch from "../../interfaces/IMatche";
 import IMatchesService from "./IMatchesService";
 import IMatchesModel from "../../Repository/Matches/IMatchesModel";
 
@@ -9,9 +9,11 @@ export default class MatchesService implements IMatchesService {
     this.model = model;
   }
 
-  async getAll(): Promise<IMatcher[]> {
-    const result = await this.model.getAll()
-    return result;
+  async getAll(inProgress: string | null): Promise<IMatch[]> {  
+    if(!inProgress) {
+      return await this.model.getAll()
+    }
+    return await this.model.getInProgress(inProgress==='true' ? true: false)
   }
 
 }
