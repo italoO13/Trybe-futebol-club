@@ -56,6 +56,25 @@ describe('Testa a camada  de Matches', () => {
         })
 
       })
+      describe('caso os times sejam iguais', () => {
+        beforeEach(() => {
+          sinon.stub(Auth.prototype, 'veriryToken').resolves({
+            id:1,
+            role: 'admin',
+          })
+          sinon.stub(MatchesModel.prototype,'matchById').resolves({...mock.newMatch, id:1, homeTeam:1, awayTeam:1})
+        })
+    
+        afterEach(()=>{
+          sinon.restore()
+        })
+
+        it('Deve retornar um status 401 e um erro com a menssagem It is not possible to create a match with two equal teams', async() => {
+          const result = await chai.request(app).post('/matches').send({...mock.newMatch, id:1, homeTeam:1, awayTeam:1})
+          .set('authorization', mock.token);
+          expect(result.status).to.equal(401);
+          expect(result.body).to.deep.equal({ "message": "It is not possible to create a match with two equal teams" });
+        })
 
     })
 
