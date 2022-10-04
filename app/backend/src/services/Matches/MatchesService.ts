@@ -1,6 +1,7 @@
 import IMatch from "../../interfaces/IMatche";
 import IMatchesService from "./IMatchesService";
 import IMatchesModel from "../../Repository/Matches/IMatchesModel";
+import CustomError from "../../helper/CustomError";
 
 export default class MatchesService implements IMatchesService {
   private model: IMatchesModel;
@@ -23,5 +24,15 @@ export default class MatchesService implements IMatchesService {
 
   async updatedProgress(idMatch:number):Promise<void> {
     await this.model.updatedProgress(idMatch)
+  }
+
+  async updatedGoals(goals: object, id: number): Promise<IMatch> {
+    const result = await this.model.updatedGoals(goals, id)
+    console.log('teste', result);
+
+    if(!result) {
+      throw new CustomError(404, 'Error trying to update match')
+    }
+    return result;
   }
 }
