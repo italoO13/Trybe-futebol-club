@@ -6,4 +6,5 @@ export default interface IMatchesModel {
   create(match: IMatch):Promise<IMatch>
   updatedProgress(id: number):Promise<void>
   matchById(id:number):Promise<IMatch | null>
+  updatedGoals(goals:object, id:number):Promise<IMatch | null>
 }

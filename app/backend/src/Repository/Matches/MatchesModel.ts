@@ -61,4 +61,12 @@ export default class MatchesModel implements IMatchesModel {
     return await this.model.findByPk(id);
   }
 
+  async updatedGoals(goals: object, id:number): Promise<IMatch | null> {
+    await this.model.update(
+      {...goals},
+      {where: {id}}
+    )
+    return await this.matchById(id);
+  }
+
 }
