@@ -125,6 +125,47 @@ describe('Testa a camada  de Matches', () => {
 
     })
 
+
+    describe('ao tentar atualizar o placar de uma partida em andamento', () => {
+
+      beforeEach(() => {
+        sinon.stub(Auth.prototype, 'veriryToken').resolves({
+          id:1,
+          role: 'admin',
+        })
+      })
+  
+      afterEach(()=>{
+        sinon.restore()
+      })
+
+
+
+      it('é possível alterar o resultado de uma partida', async() => {
+        sinon.stub(MatchesModel.prototype,'updatedGoals').resolves(mock.matches[0])
+
+        const result = await chai.request(app).patch('/matches/1').send({
+          "homeTeamGoals": 3,
+          "awayTeamGoals": 1
+        }).set('authorization', mock.token);
+        expect(result.status).to.equal(200);
+        expect(result.body).to.deep.equal(mock.matches[0]);
+      })
+
+      it('Caso aconteça um erro deve retornar uma excessão com a mensagem Error trying to update match', async () => {
+        sinon.stub(MatchesModel.prototype,'updatedGoals').resolves()
+
+        const result = await chai.request(app).patch('/matches/1').send({
+          "homeTeamGoals": 3,
+          "awayTeamGoals": 1
+        }).set('authorization', mock.token);
+        expect(result.status).to.equal(404);
+        expect(result.body).to.deep.equal({message: 'Error trying to update match'});
+
+      })
+
+    })
+
   })
 
 });
