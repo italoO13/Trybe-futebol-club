@@ -37,4 +37,14 @@ export default class MatchersController implements IMatchesController {
       next(error);
     }
   }
+
+  updatedGoals = async(req: Request, res: Response, next: NextFunction) => {
+    try {
+      const {id} = req.params;
+      const result = await this.service.updatedGoals(req.body, Number(id))
+      res.status(200).json(result)
+    } catch (error) {
+      next(error);
+    }
+  }
 }
