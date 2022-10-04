@@ -19,6 +19,7 @@ describe('Testa a camada  de LeaderBoards', () => {
     beforeEach(() => {
       sinon.stub(LeaderBoardsModel.prototype,'getAllHome').resolves(mock.leaderBoards)
       sinon.stub(LeaderBoardsModel.prototype,'getAllAway').resolves(mock.leaderBoards)
+      sinon.stub(LeaderBoardsModel.prototype,'getAll').resolves(mock.leaderBoards)
     })
 
     afterEach(()=>{
@@ -32,6 +33,11 @@ describe('Testa a camada  de LeaderBoards', () => {
     });
     it('Deve retornar um array com as clasificações dos times de fora', async() => {
       const result = await chai.request(app).get('/leaderboard/away');
+      expect(result.status).to.equal(200);
+      expect(result.body).to.deep.equal(mock.leaderBoards);
+    });
+    it('Deve retornar um array com as clasificações de todos os times em casa e fora', async() => {
+      const result = await chai.request(app).get('/leaderboard');
       expect(result.status).to.equal(200);
       expect(result.body).to.deep.equal(mock.leaderBoards);
     });
