@@ -14,5 +14,6 @@ const authMiddleware = new AuthMiddleware();
 router.get('/', matchesController.getAll)
 router.post('/', authMiddleware.authUser, matchesController.create)
 router.patch('/:id/finish', authMiddleware.authUser, matchesController.updatedProgress);
+router.patch('/:id', authMiddleware.authUser, matchesController.updatedGoals);
 
 export default router;
