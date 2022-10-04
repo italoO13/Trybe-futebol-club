@@ -15,4 +15,12 @@ export default class MatchersController implements IleaderBoardsController {
       next(error);
     }
   }
+  getAllAway = async(req: Request, res: Response, next: NextFunction) => {
+    try {
+      const response = await this.service.getAllAway();
+      res.status(200).json(response);
+    } catch (error) {
+      next(error);
+    }
+  }
 }
