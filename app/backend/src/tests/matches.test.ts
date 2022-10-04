@@ -8,6 +8,7 @@ import { app } from '../app';
 import mock from './mock'
 import MatchesModel from '../Repository/Matches/MatchesModel';
 import Auth from '../helper/Auth';
+import Match from '../database/models/Match';
 
 chai.use(chaiHttp);
 
@@ -17,7 +18,7 @@ describe('Testa a camada  de Matches', () => {
 
   describe('/GET', () => {    
     beforeEach(() => {
-      sinon.stub(MatchesModel.prototype,'getAll').resolves(mock.matches)
+      sinon.stub(Match, 'findAll').resolves(mock.matches as unknown as Match[])
     })
 
     afterEach(()=>{
@@ -41,7 +42,7 @@ describe('Testa a camada  de Matches', () => {
             id:1,
             role: 'admin',
           })
-          sinon.stub(MatchesModel.prototype,'create').resolves({...mock.newMatch, id:1})
+          sinon.stub(Match, 'create').resolves({...mock.newMatch, id:1} as unknown as Match)
         })
     
         afterEach(()=>{
@@ -109,7 +110,7 @@ describe('Testa a camada  de Matches', () => {
           id:1,
           role: 'admin',
         })
-        sinon.stub(MatchesModel.prototype,'updatedProgress').resolves()
+        sinon.stub(Match, 'update').resolves()
       })
   
       afterEach(()=>{

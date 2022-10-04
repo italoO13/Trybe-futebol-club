@@ -8,6 +8,7 @@ import { app } from '../app';
 import mock from './mock'
 import TeamsModel from '../Repository/Teams/TeamsModel';
 import ITeamsModel from '../Repository/Teams/ITeamsModel';
+import Team from '../database/models/Team';
 
 chai.use(chaiHttp);
 
@@ -20,7 +21,7 @@ describe('Testa a camada  de Teams', () => {
     
     beforeEach(() => {
       const model = new TeamsModel();
-      sinon.stub(TeamsModel.prototype,'getAll').resolves(mock.teams)
+      sinon.stub(Team, 'findAll').resolves(mock.teams as Team[])
     })
 
     afterEach(()=>{
@@ -43,7 +44,7 @@ describe('Testa a camada  de Teams', () => {
 
     it('Deve retornar o time "Avaí/Kindermann" quando passado o id 1', async() => {
       const model = new TeamsModel();
-      sinon.stub(TeamsModel.prototype,'getById').resolves(mock.teams[0])
+      sinon.stub(Team, 'findByPk').resolves(mock.teams[0] as Team)
 
       const result = await chai.request(app).get('/teams/1');
       expect(result.status).to.equal(200);
