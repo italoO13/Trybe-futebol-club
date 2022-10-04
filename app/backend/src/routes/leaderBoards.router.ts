@@ -10,5 +10,6 @@ const leaderBoardsService = new LeaderBoardsService(leaderBoardsModel)
 const leaderBoardsController = new LeaderBoardsController(leaderBoardsService);
 
 router.get('/home', leaderBoardsController.getAllHome)
+router.get('/away', leaderBoardsController.getAllAway)
 
 export default router;
