@@ -9,6 +9,7 @@ const leaderBoardsModel = new LeaderBoardsModel()
 const leaderBoardsService = new LeaderBoardsService(leaderBoardsModel)
 const leaderBoardsController = new LeaderBoardsController(leaderBoardsService);
 
+router.get('/', leaderBoardsController.getAll)
 router.get('/home', leaderBoardsController.getAllHome)
 router.get('/away', leaderBoardsController.getAllAway)
 
