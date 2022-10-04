@@ -13,4 +13,9 @@ export default class MatchesService implements ILeaderBoardService {
     const result = await this.model.getAllHome();
     return result;
   }
+
+  async getAllAway(): Promise<ILeaderBoard[]> {
+    const result = await this.model.getAllAway();
+    return result;
+  }
 }
