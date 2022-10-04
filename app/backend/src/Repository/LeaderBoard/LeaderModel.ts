@@ -24,4 +24,19 @@ export default class MatchesModel implements ILeaderBoardModel {
     return helper.getHome(team, match);
   }
 
+  async getAllAway(): Promise<ILeaderBoard[]> {
+    const match = await this.modelMatch.findAll({
+      include: [
+        {model: Team, as: 'teamHome', attributes: ['teamName'] },
+        {model: Team, as: 'teamAway', attributes: ['teamName']}
+      ],
+      where: {
+        inProgress: false,
+      }
+    })
+    const team = await this.modelTeam.findAll();
+    const helper = new HelperLeaderBoard();
+    return helper.getAway(team, match);
+  }
+
 }
